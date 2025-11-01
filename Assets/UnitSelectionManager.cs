@@ -121,11 +121,25 @@ public class UnitSelectionManager : MonoBehaviour
 
     private void EnableUnitMovement(GameObject unit, bool shouldMove)
     {
-        unit.GetComponent<UnitMovement>().enabled = shouldMove;
+        UnitMovement movement = unit.GetComponent<UnitMovement>();
+    
+        if (movement != null)
+        {
+            movement.enabled = shouldMove;
+        }
+        else
+        {
+            Debug.LogWarning($"[UnitSelectionManager] No UnitMovement component found on {unit.name}");
+        }
     }
   
   private void TriggerSelectionIndicator(GameObject unit, bool isVisible)
-  {
+    {
+        if (unit.transform.childCount == 0)
+        {
+            Debug.LogWarning($"[UnitSelectionManager] Unit {unit.name} has no children for selection indicator!");
+            return;
+        }
         unit.transform.GetChild(0).gameObject.SetActive(isVisible);
   }
 }
