@@ -100,3 +100,5 @@ InitTestScene*.unity*
 git-reset-author.sh
 git-set-remotes.sh
 git-set-local.sh
+
+.idea
